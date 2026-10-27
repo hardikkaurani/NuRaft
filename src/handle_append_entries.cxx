@@ -1175,6 +1175,8 @@ void raft_server::handle_append_entries_resp(resp_msg& resp) {
         return;
     }
 
+    ptr<peer> p = it->second;
+
     if ( srv_to_leave_ &&
          srv_to_leave_->get_id() == resp.get_src() &&
          srv_to_leave_->is_stepping_down() &&
@@ -1192,8 +1194,6 @@ void raft_server::handle_append_entries_resp(resp_msg& resp) {
     // If there are pending logs to be synced or commit index need to be advanced,
     // continue to send appendEntries to this peer
     bool need_to_catchup = true;
-
-    ptr<peer> p = it->second;
     p_tr("handle append entries resp (from %d), resp.get_next_idx(): %" PRIu64,
          (int)p->get_id(), resp.get_next_idx());
 
