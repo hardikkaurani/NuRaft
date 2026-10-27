@@ -2270,6 +2270,9 @@ int main(int argc, char** argv) {
     ts.doTest( "remove and then rejoin test",
                remove_and_then_rejoin_test );
 
+    ts.doTest( "remove srv timeout append entries resp test",
+               remove_srv_timeout_append_entries_resp_test );
+
     ts.doTest( "multiple config change test",
                multiple_config_change_test );
 
